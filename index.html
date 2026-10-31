@@ -18,7 +18,7 @@
 body{margin:0;background:linear-gradient(180deg,var(--bg),var(--card) 140%) fixed var(--bg);color:var(--fg);font:16px/1.6 Georgia,serif}
 header{display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:0 auto;padding:1rem}
 h1{font-size:1.4rem;margin:0}
-main{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;max-width:960px;margin:0 auto;padding:0 1rem 2rem}
+main{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;max-width:960px;margin:0 auto;padding:0 1rem 2rem}
 article{background:var(--card);border:1px solid var(--bd);border-radius:12px;border-left:6px solid var(--ac);padding:1.25rem;display:flex;flex-direction:column;gap:.75rem}
 h2{margin:0;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ac)}
 blockquote{margin:0;flex:1;font-size:1.15rem}
@@ -102,7 +102,20 @@ var Q={
 ["Man is made by his belief. As he believes, so he is.","Bhagavad Gita 17.3"],
 ["Aham Brahmasmi: I am Brahman.","Brihadaranyaka Upanishad"],
 ["The whole world is one family.","Maha Upanishad"],
-["Arise, awake, and stop not till the goal is reached.","Swami Vivekananda (Katha Upanishad)"]]
+["Arise, awake, and stop not till the goal is reached.","Swami Vivekananda (Katha Upanishad)"]],
+"Christian Philosophy":[
+["Our heart is restless until it rests in you.","Augustine, Confessions"],
+["Faith seeks understanding.","Anselm of Canterbury"],
+["Love, and do what you will.","Augustine"],
+["Pride is the beginning of all sin.","Augustine (cf. Sirach 10:13)"],
+["Grace does not destroy nature, but perfects it.","Thomas Aquinas"],
+["To one who has faith, no explanation is necessary. To one without faith, no explanation is possible.","Attributed to Thomas Aquinas"],
+["The things that we love tell us what we are.","Attributed to Thomas Aquinas"],
+["The heart has its reasons which reason knows nothing of.","Blaise Pascal"],
+["Man is but a reed, the most feeble thing in nature; but he is a thinking reed.","Blaise Pascal"],
+["Faith is the opposite of doubt only in appearance; it is a movement beyond it.","Paraphrase of Kierkegaard"],
+["Life can only be understood backwards; but it must be lived forwards.","S\u00F8ren Kierkegaard"],
+["Pray as though everything depended on God. Work as though everything depended on you.","Attributed to Augustine"]]
 };
 var cards=document.getElementById("cards"),last={};
 function pick(k){var a=Q[k],i;do{i=Math.random()*a.length|0}while(a.length>1&&i===last[k]);last[k]=i;return a[i]}
