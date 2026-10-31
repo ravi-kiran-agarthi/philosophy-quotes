@@ -10,27 +10,27 @@
 (function(){var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t})();
 </script>
 <style>
-:root{--bg:#f7f5f0;--fg:#1f1d1a;--card:#fff;--mut:#6b655c;--bd:#e4dfd5;--ac:#8a4b2a}
-@media(prefers-color-scheme:dark){:root{--bg:#141413;--fg:#ece8df;--card:#1e1d1b;--mut:#a39d91;--bd:#33312d;--ac:#e0a070}}
-:root[data-theme=light]{--bg:#f7f5f0;--fg:#1f1d1a;--card:#fff;--mut:#6b655c;--bd:#e4dfd5;--ac:#8a4b2a}
-:root[data-theme=dark]{--bg:#141413;--fg:#ece8df;--card:#1e1d1b;--mut:#a39d91;--bd:#33312d;--ac:#e0a070}
+:root{--bg:#eaf3e6;--fg:#14261a;--card:#fbfef9;--mut:#3f5846;--bd:#b9d3b8;--ac:#1f6b2e;--bt:#1f6b2e;--bf:#fff}
+@media(prefers-color-scheme:dark){:root{--bg:#0c1810;--fg:#e8f3e5;--card:#142419;--mut:#b4c9b8;--bd:#2c4a35;--ac:#8fd69b;--bt:#8fd69b;--bf:#0c1810}}
+:root[data-theme=light]{--bg:#eaf3e6;--fg:#14261a;--card:#fbfef9;--mut:#3f5846;--bd:#b9d3b8;--ac:#1f6b2e;--bt:#1f6b2e;--bf:#fff}
+:root[data-theme=dark]{--bg:#0c1810;--fg:#e8f3e5;--card:#142419;--mut:#b4c9b8;--bd:#2c4a35;--ac:#8fd69b;--bt:#8fd69b;--bf:#0c1810}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 Georgia,serif}
+body{margin:0;background:linear-gradient(180deg,var(--bg),var(--card) 140%) fixed var(--bg);color:var(--fg);font:16px/1.6 Georgia,serif}
 header{display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:0 auto;padding:1rem}
 h1{font-size:1.4rem;margin:0}
 main{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;max-width:960px;margin:0 auto;padding:0 1rem 2rem}
-article{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:.75rem}
+article{background:var(--card);border:1px solid var(--bd);border-radius:12px;border-left:6px solid var(--ac);padding:1.25rem;display:flex;flex-direction:column;gap:.75rem}
 h2{margin:0;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ac)}
 blockquote{margin:0;flex:1;font-size:1.15rem}
 cite{display:block;margin-top:.5rem;font-size:.9rem;color:var(--mut)}
 button,select{font:inherit;font-size:.9rem;color:var(--fg);background:transparent;border:1px solid var(--bd);border-radius:8px;padding:.4rem .8rem;cursor:pointer}
-article button{align-self:flex-start;border-color:var(--ac);color:var(--ac)}
-button:hover{background:var(--bd)}
+article button{align-self:flex-start;background:var(--bt);border-color:var(--bt);color:var(--bf);font-weight:700}
+button:hover{filter:brightness(1.12)}select{background:var(--card)}
 :focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 </style>
 </head>
 <body>
-<header><h1>Philosophy Quotes</h1>
+<header><h1>🌿 Philosophy Quotes</h1>
 <label>Theme <select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
 <main id="cards"></main>
 <script>
