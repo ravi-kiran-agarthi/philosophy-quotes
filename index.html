@@ -31,21 +31,21 @@ button:hover{filter:brightness(1.12)}select{background:var(--card)}
 :focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 @supports(appearance:base-select){
 select,::picker(select){appearance:base-select}
-select{display:inline-flex;align-items:center;gap:.5rem;background:var(--card);border-color:var(--ac);font-weight:700}
+select{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .8rem;background:var(--card);border-color:var(--ac);font-weight:700}
 select::picker-icon{color:var(--ac);transition:rotate .2s}
 select:open::picker-icon{rotate:180deg}
 ::picker(select){background:var(--card);color:var(--fg);border:1px solid var(--ac);border-radius:10px;padding:.25rem;margin-top:.25rem}
 option{padding:.5rem .9rem;border-radius:6px;cursor:pointer}
 option:hover,option:focus-visible{background:var(--bd)}
 option:checked{background:var(--bt);color:var(--bf)}
-option::checkmark{content:"\2713";margin-inline-start:.75rem}
+select button{all:unset;display:inline-flex;align-items:center;gap:.5rem;cursor:pointer}option{display:flex;align-items:center;gap:.5rem}option span{font-size:1.1rem}option::checkmark{content:"\2713";margin-inline-start:.75rem}
 }
 @media(prefers-reduced-motion:reduce){select::picker-icon{transition:none}}
 </style>
 </head>
 <body>
 <header><h1>🌿 Philosophy Quotes</h1>
-<label>Theme <select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<label>Theme <select id="theme"><button type="button"><selectedcontent></selectedcontent></button><option value="system"><span aria-hidden="true">💻</span> System</option><option value="light"><span aria-hidden="true">☀️</span> Light</option><option value="dark"><span aria-hidden="true">🌙</span> Dark</option></select></label></header>
 <main id="cards"></main>
 <hr>
 <section id="wotd" aria-labelledby="wh"><h2 id="wh">Word of the Day</h2><div aria-live="polite">Loading…</div></section>

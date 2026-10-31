@@ -7,7 +7,7 @@ Quote cards for Stoicism, Taoism, Zen Buddhism and Hindu philosophy. Each card h
 ## Features
 
 - 4 cards, 12 quotes each, random pick without immediate repeats
-- Light / Dark / System theme (picker uses customizable `appearance: base-select` where supported, native select elsewhere); defaults to system, choice saved in `localStorage`, applied before paint (no flash)
+- Light / Dark / System theme (picker uses customizable `appearance: base-select` where supported, native select elsewhere), with an emoji icon per option; defaults to system, choice saved in `localStorage`, applied before paint (no flash)
 - Nature green theme with high-contrast text, visible focus outlines, and `aria-live` quote updates
 - Word of the Day section below the cards (no button, no card): Merriam-Webster's free RSS feed, fetched at deploy time by `scripts/wotd.py` into `wotd.json`; the workflow redeploys daily at 06:15 UTC; pronunciation clip (~5 KB) loads only when "Listen" is pressed
 - Fast on slow connections: ~9 KB `index.html`, inline CSS/JS, no dependencies or web fonts; only one tiny `wotd.json` request
