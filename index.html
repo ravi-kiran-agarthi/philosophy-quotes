@@ -31,7 +31,7 @@ button:hover{filter:brightness(1.12)}select{background:var(--card)}
 :focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 @supports(appearance:base-select){
 select,::picker(select){appearance:base-select}
-select{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .8rem;background:var(--card);border-color:var(--ac);font-weight:700}
+select{display:inline-flex;align-items:center;justify-content:space-between;inline-size:9rem;gap:.5rem;padding:.4rem .8rem;background:var(--card);border-color:var(--ac);font-weight:700}
 select::picker-icon{color:var(--ac);transition:rotate .2s}
 select:open::picker-icon{rotate:180deg}
 ::picker(select){background:var(--card);color:var(--fg);border:1px solid var(--ac);border-radius:10px;padding:.25rem;margin-top:.25rem}
