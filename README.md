@@ -28,6 +28,6 @@ Some entries (Zen, Taoism, and a few attributed to Augustine or Aquinas) are tra
 
 Open `?lang=te`: https://ravi-kiran-agarthi.github.io/philosophy-quotes/?lang=te
 
-Shows the same five philosophies with all 60 quotes translated into Telugu (no toggle). Translations are in `te.json`, loaded only in this mode, so the English page is unaffected. Word of the Day is hidden.
+Shows the same five philosophies with translated quotes (Stoicism: the 66 Gutenberg quotes; others: 12 each) into Telugu (no toggle). Translations are in `te.json`, loaded only in this mode, so the English page is unaffected. Word of the Day is hidden.
 
 The Telugu translations are unreviewed; a native speaker should check nuance.
