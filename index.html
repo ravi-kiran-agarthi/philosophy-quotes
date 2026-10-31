@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Philosophy Quotes</title>
-<meta name="description" content="Quotes from Stoicism, Taoism, Zen Buddhism and Hindu philosophy.">
+<meta name="description" content="Quotes from Stoicism, Taoism, Zen Buddhism, Hindu and Christian philosophy.">
 <meta name="color-scheme" content="light dark">
 <script>
 (function(){var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t})();
@@ -102,7 +102,20 @@ var Q={
 ["Man is made by his belief. As he believes, so he is.","Bhagavad Gita 17.3"],
 ["Aham Brahmasmi: I am Brahman.","Brihadaranyaka Upanishad"],
 ["The whole world is one family.","Maha Upanishad"],
-["Arise, awake, and stop not till the goal is reached.","Swami Vivekananda (Katha Upanishad)"]]
+["Arise, awake, and stop not till the goal is reached.","Swami Vivekananda (Katha Upanishad)"]],
+"Christian Philosophy":[
+["You have made us for yourself, and our heart is restless until it rests in you.","Augustine, Confessions 1.1"],
+["Love, and do what you will.","Augustine, Homilies on 1 John 7.8"],
+["I do not seek to understand in order that I may believe, but I believe in order to understand.","Anselm, Proslogion 1"],
+["The truth that human reason naturally knows cannot be contrary to the truth of the Christian faith.","Thomas Aquinas, Summa Contra Gentiles I.7"],
+["Grace does not destroy nature, but perfects it.","Thomas Aquinas, Summa Theologiae I, q.1, a.8 ad 2"],
+["The heart has its reasons, of which reason knows nothing.","Blaise Pascal, Pensées 423 (Lafuma)"],
+["Man is but a reed, the most feeble thing in nature; but he is a thinking reed.","Blaise Pascal, Pensées 200 (Lafuma)"],
+["Purity of heart is to will one thing.","Søren Kierkegaard, Purity of Heart Is to Will One Thing"],
+["Life can only be understood backwards; but it must be lived forwards.","Søren Kierkegaard, Journals (1843)"],
+["Faith is the highest passion in a human being.","Søren Kierkegaard, Fear and Trembling"],
+["I believe in Christianity as I believe that the Sun has risen: not only because I see it, but because by it I see everything else.","C. S. Lewis, Is Theology Poetry?"],
+["If I find in myself a desire which no experience in this world can satisfy, the most probable explanation is that I was made for another world.","C. S. Lewis, Mere Christianity"]]
 };
 var cards=document.getElementById("cards"),last={};
 function pick(k){var a=Q[k],i;do{i=Math.random()*a.length|0}while(a.length>1&&i===last[k]);last[k]=i;return a[i]}
