@@ -102,7 +102,7 @@ n.onclick=show;show();a.append(h,b,n);cards.appendChild(a)});
 (function(){
 var d=document.querySelector("#wotd div");
 function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;e.textContent=x;return e}
-fetch("wotd.json").then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(w){
+fetch("wotd.json",{cache:"no-cache"}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(w){
 d.textContent="";
 d.append(el("p","w",w.word),el("p","m","/"+w.pron+"/ \u00B7 "+w.pos));
 if(w.audio){var b=el("button","","\u{1F50A} Listen");b.type="button";b.setAttribute("aria-label","Listen to pronunciation of "+w.word);var au;b.onclick=function(){au=au||new Audio(w.audio);au.currentTime=0;au.play()};d.append(b)}
