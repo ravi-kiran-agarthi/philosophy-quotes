@@ -119,9 +119,9 @@ var Q={
 ["Pray as though everything depended on God. Work as though everything depended on you.","Attributed to Augustine"]]
 };
 var cards=document.getElementById("cards"),te=new URLSearchParams(location.search).get("lang")==="te";
-function card(k,list,label){var last,a=document.createElement("article"),h=document.createElement("h2"),b=document.createElement("blockquote"),c=document.createElement("cite"),n=document.createElement("button");
+function card(k,list,label){var last,seen={},a=document.createElement("article"),h=document.createElement("h2"),b=document.createElement("blockquote"),c=document.createElement("cite"),n=document.createElement("button");
 h.textContent=k;n.textContent=label;n.type="button";b.setAttribute("aria-live","polite");
-function show(){var i;do{i=Math.random()*list.length|0}while(list.length>1&&i===last);last=i;var q=list[i];b.textContent="\u201C"+q[0]+"\u201D";c.textContent="\u2014 "+q[1];b.appendChild(c)}
+function show(){var i,u=[],j;for(j=0;j<list.length;j++)if(!seen[j])u.push(j);if(!u.length){seen={};if(last!=null)seen[last]=1;for(j=0;j<list.length;j++)if(!seen[j])u.push(j)}i=u[Math.random()*u.length|0];seen[i]=1;last=i;var q=list[i];b.textContent="\u201C"+q[0]+"\u201D";c.textContent="\u2014 "+q[1];b.appendChild(c)}
 n.onclick=show;show();a.append(h,b,n);cards.appendChild(a)}
 if(te){
 var R=document.documentElement;R.lang="te";document.title="తత్త్వ సూక్తులు";
@@ -132,6 +132,7 @@ document.querySelector("hr").remove();document.getElementById("wotd").remove();
 fetch("te.json").then(function(r){return r.json()}).then(function(d){d.forEach(function(x){card(x.t,x.q,"కొత్త సూక్తి")})})
 }else{
 Object.keys(Q).forEach(function(k){card(k,Q[k],"New quote")});
+setTimeout(function(){fetch("stoic.json").then(function(r){return r.json()}).then(function(d){Array.prototype.push.apply(Q.Stoicism,d)}).catch(function(){})},1500);
 (function(){
 var d=document.querySelector("#wotd div");
 function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;e.textContent=x;return e}
