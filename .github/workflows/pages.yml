@@ -2,6 +2,8 @@ name: Deploy Pages
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: "15 6 * * *"
   workflow_dispatch:
 permissions:
   contents: read
@@ -18,7 +20,7 @@ jobs:
       url: ${{ steps.d.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - run: mkdir _site && cp index.html _site/
+      - run: mkdir _site && cp index.html _site/ && python3 scripts/wotd.py _site/wotd.json
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

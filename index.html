@@ -23,6 +23,8 @@ article{background:var(--card);border:1px solid var(--bd);border-radius:12px;bor
 h2{margin:0;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ac)}
 blockquote{margin:0;flex:1;font-size:1.15rem}
 cite{display:block;margin-top:.5rem;font-size:.9rem;color:var(--mut)}
+article div{flex:1}article p{margin:0 0 .6rem}.w{font-size:1.5rem;font-weight:700}.m{color:var(--mut);font-size:.95rem}
+article a{color:var(--ac);font-weight:700}
 button,select{font:inherit;font-size:.9rem;color:var(--fg);background:transparent;border:1px solid var(--bd);border-radius:8px;padding:.4rem .8rem;cursor:pointer}
 article button{align-self:flex-start;background:var(--bt);border-color:var(--bt);color:var(--bf);font-weight:700}
 button:hover{filter:brightness(1.12)}select{background:var(--card)}
@@ -95,6 +97,17 @@ var a=document.createElement("article"),h=document.createElement("h2"),b=documen
 h.textContent=k;n.textContent="New quote";n.type="button";b.setAttribute("aria-live","polite");
 function show(){var q=pick(k);b.textContent="\u201C"+q[0]+"\u201D";c.textContent="\u2014 "+q[1];b.appendChild(c)}
 n.onclick=show;show();a.append(h,b,n);cards.appendChild(a)});
+(function(){
+var a=document.createElement("article"),h=document.createElement("h2"),d=document.createElement("div");
+h.textContent="Word of the Day";d.textContent="Loading\u2026";d.setAttribute("aria-live","polite");a.append(h,d);cards.appendChild(a);
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;e.textContent=x;return e}
+fetch("wotd.json").then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(w){
+d.textContent="";
+d.append(el("p","w",w.word),el("p","m","/"+w.pron+"/ \u00B7 "+w.pos),el("p","",w.def));
+if(w.ex)d.append(el("p","m","\u201C"+w.ex+"\u201D"));
+var l=el("a","",w.url?"Merriam-Webster \u2192":"");l.href=w.url;l.rel="noopener";d.append(l)
+}).catch(function(){d.textContent="Word of the day is unavailable right now."})
+})();
 var s=document.getElementById("theme");s.value=localStorage.getItem("theme")||"system";
 s.onchange=function(){var v=s.value,r=document.documentElement;if(v==="system"){localStorage.removeItem("theme");delete r.dataset.theme}else{localStorage.setItem("theme",v);r.dataset.theme=v}};
 </script>
