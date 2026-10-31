@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Philosophy Quotes</title>
+<meta name="description" content="Quotes from Stoicism, Taoism, Zen Buddhism and Hindu philosophy.">
+<meta name="color-scheme" content="light dark">
+<script>
+(function(){var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t})();
+</script>
+<style>
+:root{--bg:#f7f5f0;--fg:#1f1d1a;--card:#fff;--mut:#6b655c;--bd:#e4dfd5;--ac:#8a4b2a}
+@media(prefers-color-scheme:dark){:root{--bg:#141413;--fg:#ece8df;--card:#1e1d1b;--mut:#a39d91;--bd:#33312d;--ac:#e0a070}}
+:root[data-theme=light]{--bg:#f7f5f0;--fg:#1f1d1a;--card:#fff;--mut:#6b655c;--bd:#e4dfd5;--ac:#8a4b2a}
+:root[data-theme=dark]{--bg:#141413;--fg:#ece8df;--card:#1e1d1b;--mut:#a39d91;--bd:#33312d;--ac:#e0a070}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 Georgia,serif}
+header{display:flex;justify-content:space-between;align-items:center;max-width:960px;margin:0 auto;padding:1rem}
+h1{font-size:1.4rem;margin:0}
+main{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;max-width:960px;margin:0 auto;padding:0 1rem 2rem}
+article{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:.75rem}
+h2{margin:0;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ac)}
+blockquote{margin:0;flex:1;font-size:1.15rem}
+cite{display:block;margin-top:.5rem;font-size:.9rem;color:var(--mut)}
+button,select{font:inherit;font-size:.9rem;color:var(--fg);background:transparent;border:1px solid var(--bd);border-radius:8px;padding:.4rem .8rem;cursor:pointer}
+article button{align-self:flex-start;border-color:var(--ac);color:var(--ac)}
+button:hover{background:var(--bd)}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+</style>
+</head>
+<body>
+<header><h1>Philosophy Quotes</h1>
+<label>Theme <select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<main id="cards"></main>
+<script>
+var Q={
+"Stoicism":[
+["The happiness of your life depends upon the quality of your thoughts.","Marcus Aurelius"],
+["You have power over your mind, not outside events. Realize this, and you will find strength.","Marcus Aurelius"],
+["The impediment to action advances action. What stands in the way becomes the way.","Marcus Aurelius"],
+["We suffer more often in imagination than in reality.","Seneca"],
+["It is not that we have a short time to live, but that we waste a lot of it.","Seneca"],
+["Luck is what happens when preparation meets opportunity.","Seneca"],
+["Difficulties strengthen the mind, as labor does the body.","Seneca"],
+["It's not what happens to you, but how you react to it that matters.","Epictetus"],
+["No man is free who is not master of himself.","Epictetus"],
+["First say to yourself what you would be; and then do what you have to do.","Epictetus"],
+["He who fears death will never do anything worthy of a living man.","Seneca"],
+["Waste no more time arguing about what a good man should be. Be one.","Marcus Aurelius"]],
+"Taoism":[
+["A journey of a thousand miles begins with a single step.","Lao Tzu"],
+["Nature does not hurry, yet everything is accomplished.","Lao Tzu"],
+["He who knows that enough is enough will always have enough.","Lao Tzu"],
+["Knowing others is intelligence; knowing yourself is true wisdom.","Lao Tzu"],
+["When I let go of what I am, I become what I might be.","Lao Tzu"],
+["The softest thing in the universe overcomes the hardest.","Lao Tzu"],
+["Be content with what you have; rejoice in the way things are.","Lao Tzu"],
+["Happiness is the absence of the striving for happiness.","Zhuangzi"],
+["Flow with whatever may happen and let your mind be free.","Zhuangzi"],
+["The wise man does not lay up his own treasures. The more he gives to others, the more he has for his own.","Lao Tzu"],
+["Care about people's approval and you will be their prisoner.","Lao Tzu"],
+["To the mind that is still, the whole universe surrenders.","Lao Tzu"]],
+"Zen Buddhism":[
+["Before enlightenment, chop wood, carry water. After enlightenment, chop wood, carry water.","Zen proverb"],
+["If you meet the Buddha on the road, kill him.","Linji Yixuan"],
+["Fall seven times, stand up eight.","Japanese proverb"],
+["When you reach the top of the mountain, keep climbing.","Zen proverb"],
+["In the beginner's mind there are many possibilities, but in the expert's there are few.","Shunryu Suzuki"],
+["Moment by moment, the world is created anew.","Zen saying"],
+["The obstacle is the path.","Zen proverb"],
+["Sitting quietly, doing nothing, spring comes, and the grass grows by itself.","Zen saying"],
+["Do not seek the truth; only cease to cherish opinions.","Sengcan"],
+["Nothing in the world is more flexible than water, yet nothing is stronger.","Zen saying"],
+["The way is not in the sky. The way is in the heart.","Attributed to Buddha"],
+["Let go or be dragged.","Zen proverb"]],
+"Hindu Philosophy":[
+["You have a right to your actions, but never to your actions' fruits.","Bhagavad Gita 2.47"],
+["The soul is never born nor dies; it is unborn, eternal, ever-existing.","Bhagavad Gita 2.20"],
+["Truth is one; the sages call it by many names.","Rig Veda 1.164.46"],
+["Tat tvam asi: You are that.","Chandogya Upanishad"],
+["Lead me from untruth to truth, from darkness to light, from death to immortality.","Brihadaranyaka Upanishad"],
+["Yoga is skill in action.","Bhagavad Gita 2.50"],
+["The mind is restless and difficult to restrain, but it is subdued by practice.","Bhagavad Gita 6.35"],
+["One who sees inaction in action, and action in inaction, is wise.","Bhagavad Gita 4.18"],
+["Man is made by his belief. As he believes, so he is.","Bhagavad Gita 17.3"],
+["Aham Brahmasmi: I am Brahman.","Brihadaranyaka Upanishad"],
+["The whole world is one family.","Maha Upanishad"],
+["Arise, awake, and stop not till the goal is reached.","Swami Vivekananda (Katha Upanishad)"]]
+};
+var cards=document.getElementById("cards"),last={};
+function pick(k){var a=Q[k],i;do{i=Math.random()*a.length|0}while(a.length>1&&i===last[k]);last[k]=i;return a[i]}
+Object.keys(Q).forEach(function(k){
+var a=document.createElement("article"),h=document.createElement("h2"),b=document.createElement("blockquote"),c=document.createElement("cite"),n=document.createElement("button");
+h.textContent=k;n.textContent="New quote";n.type="button";b.setAttribute("aria-live","polite");
+function show(){var q=pick(k);b.textContent="\u201C"+q[0]+"\u201D";c.textContent="\u2014 "+q[1];b.appendChild(c)}
+n.onclick=show;show();a.append(h,b,n);cards.appendChild(a)});
+var s=document.getElementById("theme");s.value=localStorage.getItem("theme")||"system";
+s.onchange=function(){var v=s.value,r=document.documentElement;if(v==="system"){localStorage.removeItem("theme");delete r.dataset.theme}else{localStorage.setItem("theme",v);r.dataset.theme=v}};
+</script>
+</body>
+</html>
