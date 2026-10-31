@@ -24,7 +24,7 @@ h2{margin:0;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:
 blockquote{margin:0;flex:1;font-size:1.15rem}
 cite{display:block;margin-top:.5rem;font-size:.9rem;color:var(--mut)}
 hr{max-width:960px;margin:0 auto;border:0;border-top:1px solid var(--bd)}
-section{max-width:960px;margin:0 auto;padding:1.5rem 1rem 3rem}section h2{margin-bottom:.5rem}section p{margin:0 0 .6rem;max-width:65ch}.w{font-size:1.6rem;font-weight:700}.m{color:var(--mut);font-size:.95rem}section a{color:var(--ac);font-weight:700}
+section{max-width:960px;margin:0 auto;padding:1.5rem 1rem 3rem}section h2{margin-bottom:.5rem}section p{margin:0 0 .6rem;max-width:65ch}.w{font-size:1.6rem;font-weight:700}.m{color:var(--mut);font-size:.95rem}section button{margin:0 0 .6rem}section a{color:var(--ac);font-weight:700}
 button,select{font:inherit;font-size:.9rem;color:var(--fg);background:transparent;border:1px solid var(--bd);border-radius:8px;padding:.4rem .8rem;cursor:pointer}
 article button{align-self:flex-start;background:var(--bt);border-color:var(--bt);color:var(--bf);font-weight:700}
 button:hover{filter:brightness(1.12)}select{background:var(--card)}
@@ -104,7 +104,9 @@ var d=document.querySelector("#wotd div");
 function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;e.textContent=x;return e}
 fetch("wotd.json").then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(w){
 d.textContent="";
-d.append(el("p","w",w.word),el("p","m","/"+w.pron+"/ \u00B7 "+w.pos),el("p","",w.def));
+d.append(el("p","w",w.word),el("p","m","/"+w.pron+"/ \u00B7 "+w.pos));
+if(w.audio){var b=el("button","","\u{1F50A} Listen");b.type="button";b.setAttribute("aria-label","Listen to pronunciation of "+w.word);var au;b.onclick=function(){au=au||new Audio(w.audio);au.currentTime=0;au.play()};d.append(b)}
+d.append(el("p","",w.def));
 if(w.ex)d.append(el("p","m","\u201C"+w.ex+"\u201D"));
 var l=el("a","",w.url?"Merriam-Webster \u2192":"");l.href=w.url;l.rel="noopener";d.append(l)
 }).catch(function(){d.textContent="Word of the day is unavailable right now."})

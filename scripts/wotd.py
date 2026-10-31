@@ -31,6 +31,24 @@ out = {
     "ex": text(ex.group(1)) if ex else "",
     "url": cdata("link"),
 }
+
+def audio_url(word):
+    base = re.sub(r"[^a-z]", "", word.lower())[:6].ljust(6, "0")
+    if not base.strip("0"):
+        return ""
+    sub = "bix" if base.startswith("bix") else "gg" if base.startswith("gg") else base[0]
+    for n in ("01", "02"):
+        url = "https://media.merriam-webster.com/audio/prons/en/us/mp3/%s/%s%s.mp3" % (sub, base, n)
+        try:
+            r = urllib.request.urlopen(urllib.request.Request(url, method="HEAD", headers={"User-Agent": "philosophy-quotes-site"}), timeout=15)
+            if r.status == 200:
+                return url
+        except Exception:
+            pass
+    return ""
+
+
+out["audio"] = audio_url(out["word"])
 with open(sys.argv[1], "w", encoding="utf-8") as f:
     json.dump(out, f, ensure_ascii=False, separators=(",", ":"))
 print(out)
