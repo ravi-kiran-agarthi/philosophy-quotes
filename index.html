@@ -41,6 +41,7 @@ option:checked{background:var(--bt);color:var(--bf)}
 select button{all:unset;display:inline-flex;align-items:center;gap:.5rem;cursor:pointer}option{display:flex;align-items:center;gap:.5rem}option span{font-size:1.1rem}option::checkmark{content:"\2713";margin-inline-start:.75rem}
 }
 @media(prefers-reduced-motion:reduce){select::picker-icon{transition:none}}
+html[lang=te] body{font-family:"Noto Serif Telugu","Noto Sans Telugu","Nirmala UI",Gautami,"Telugu Sangam MN",serif;line-height:1.9}html[lang=te] blockquote{white-space:pre-line}
 </style>
 </head>
 <body>
@@ -117,13 +118,20 @@ var Q={
 ["Life can only be understood backwards; but it must be lived forwards.","S\u00F8ren Kierkegaard"],
 ["Pray as though everything depended on God. Work as though everything depended on you.","Attributed to Augustine"]]
 };
-var cards=document.getElementById("cards"),last={};
-function pick(k){var a=Q[k],i;do{i=Math.random()*a.length|0}while(a.length>1&&i===last[k]);last[k]=i;return a[i]}
-Object.keys(Q).forEach(function(k){
-var a=document.createElement("article"),h=document.createElement("h2"),b=document.createElement("blockquote"),c=document.createElement("cite"),n=document.createElement("button");
-h.textContent=k;n.textContent="New quote";n.type="button";b.setAttribute("aria-live","polite");
-function show(){var q=pick(k);b.textContent="\u201C"+q[0]+"\u201D";c.textContent="\u2014 "+q[1];b.appendChild(c)}
-n.onclick=show;show();a.append(h,b,n);cards.appendChild(a)});
+var cards=document.getElementById("cards"),te=new URLSearchParams(location.search).get("lang")==="te";
+function card(k,list,label){var last,a=document.createElement("article"),h=document.createElement("h2"),b=document.createElement("blockquote"),c=document.createElement("cite"),n=document.createElement("button");
+h.textContent=k;n.textContent=label;n.type="button";b.setAttribute("aria-live","polite");
+function show(){var i;do{i=Math.random()*list.length|0}while(list.length>1&&i===last);last=i;var q=list[i];b.textContent="\u201C"+q[0]+"\u201D";c.textContent="\u2014 "+q[1];b.appendChild(c)}
+n.onclick=show;show();a.append(h,b,n);cards.appendChild(a)}
+if(te){
+var R=document.documentElement;R.lang="te";document.title="తత్త్వ సూక్తులు";
+document.querySelector("h1").textContent="\u{1F33F} తత్త్వ సూక్తులు";
+document.querySelector("label").firstChild.textContent="థీమ్ ";
+var o=document.querySelectorAll("option");o[0].lastChild.textContent=" సిస్టమ్";o[1].lastChild.textContent=" లైట్";o[2].lastChild.textContent=" డార్క్";
+document.querySelector("hr").remove();document.getElementById("wotd").remove();
+fetch("te.json").then(function(r){return r.json()}).then(function(d){card("వేమన",d.v,"కొత్త పద్యం");card("భగవద్గీత",d.g,"కొత్త పద్యం")})
+}else{
+Object.keys(Q).forEach(function(k){card(k,Q[k],"New quote")});
 (function(){
 var d=document.querySelector("#wotd div");
 function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;e.textContent=x;return e}
@@ -136,6 +144,7 @@ if(w.ex)d.append(el("p","m","\u201C"+w.ex+"\u201D"));
 var l=el("a","",w.url?"Merriam-Webster \u2192":"");l.href=w.url;l.rel="noopener";d.append(l)
 }).catch(function(){d.textContent="Word of the day is unavailable right now."})
 })();
+}
 var s=document.getElementById("theme");s.value=localStorage.getItem("theme")||"system";
 s.onchange=function(){var v=s.value,r=document.documentElement;if(v==="system"){localStorage.removeItem("theme");delete r.dataset.theme}else{localStorage.setItem("theme",v);r.dataset.theme=v}};
 </script>

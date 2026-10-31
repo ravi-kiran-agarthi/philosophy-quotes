@@ -23,3 +23,14 @@ Pushes to `main` deploy to GitHub Pages via `.github/workflows/pages.yml`.
 ## Note
 
 Some entries (Zen, Taoism, and a few attributed to Augustine or Aquinas) are traditional sayings or attributions rather than verified quotes; they are labelled accordingly.
+
+## Telugu
+
+Open `?lang=te`: https://ravi-kiran-agarthi.github.io/philosophy-quotes/?lang=te
+
+Shows Telugu cards instead of the English ones (no toggle). Verses are loaded from `te.json` only in this mode, so the English page is unaffected. Word of the Day is hidden.
+
+- **Vemana**: verses from *Vemana Padyalu* (17th century, C. P. Brown 1910 edition)
+- **Bhagavad Gita**: *Andhra Bhagavad Gita* by Tadoori Lakshmi Narasimha Rayakavi (1911)
+
+Both are public-domain texts, used verse-only (original verses, no modern translations or commentary). Verses were selected from Telugu Wikisource and are not edited; their wording may include old spellings or transcription errors.
