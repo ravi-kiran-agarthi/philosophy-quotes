@@ -23,8 +23,8 @@ article{background:var(--card);border:1px solid var(--bd);border-radius:12px;bor
 h2{margin:0;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ac)}
 blockquote{margin:0;flex:1;font-size:1.15rem}
 cite{display:block;margin-top:.5rem;font-size:.9rem;color:var(--mut)}
-article div{flex:1}article p{margin:0 0 .6rem}.w{font-size:1.5rem;font-weight:700}.m{color:var(--mut);font-size:.95rem}
-article a{color:var(--ac);font-weight:700}
+hr{max-width:960px;margin:0 auto;border:0;border-top:1px solid var(--bd)}
+section{max-width:960px;margin:0 auto;padding:1.5rem 1rem 3rem}section h2{margin-bottom:.5rem}section p{margin:0 0 .6rem;max-width:65ch}.w{font-size:1.6rem;font-weight:700}.m{color:var(--mut);font-size:.95rem}section a{color:var(--ac);font-weight:700}
 button,select{font:inherit;font-size:.9rem;color:var(--fg);background:transparent;border:1px solid var(--bd);border-radius:8px;padding:.4rem .8rem;cursor:pointer}
 article button{align-self:flex-start;background:var(--bt);border-color:var(--bt);color:var(--bf);font-weight:700}
 button:hover{filter:brightness(1.12)}select{background:var(--card)}
@@ -35,6 +35,8 @@ button:hover{filter:brightness(1.12)}select{background:var(--card)}
 <header><h1>🌿 Philosophy Quotes</h1>
 <label>Theme <select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
 <main id="cards"></main>
+<hr>
+<section id="wotd" aria-labelledby="wh"><h2 id="wh">Word of the Day</h2><div aria-live="polite">Loading…</div></section>
 <script>
 var Q={
 "Stoicism":[
@@ -98,8 +100,7 @@ h.textContent=k;n.textContent="New quote";n.type="button";b.setAttribute("aria-l
 function show(){var q=pick(k);b.textContent="\u201C"+q[0]+"\u201D";c.textContent="\u2014 "+q[1];b.appendChild(c)}
 n.onclick=show;show();a.append(h,b,n);cards.appendChild(a)});
 (function(){
-var a=document.createElement("article"),h=document.createElement("h2"),d=document.createElement("div");
-h.textContent="Word of the Day";d.textContent="Loading\u2026";d.setAttribute("aria-live","polite");a.append(h,d);cards.appendChild(a);
+var d=document.querySelector("#wotd div");
 function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;e.textContent=x;return e}
 fetch("wotd.json").then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(w){
 d.textContent="";
