@@ -42,6 +42,8 @@ select button{all:unset;display:inline-flex;align-items:center;gap:.5rem;cursor:
 }
 @media(prefers-reduced-motion:reduce){select::picker-icon{transition:none}}
 html[lang=te] body{font-family:"Noto Serif Telugu","Noto Sans Telugu","Nirmala UI",Gautami,"Telugu Sangam MN",serif;line-height:1.9}
+#ask textarea{display:block;width:100%;max-width:65ch;margin:.5rem 0;font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:.6rem;resize:vertical}
+.ar{display:flex;gap:.5rem;margin:.25rem 0 .75rem}.ar button{margin:0}#ask button[type=submit]{background:var(--bt);border-color:var(--bt);color:var(--bf);font-weight:700}#mic[aria-pressed=true]{border-color:var(--ac);color:var(--ac);font-weight:700}#ares ol{margin:.3rem 0;padding-left:1.3rem;max-width:65ch}
 </style>
 </head>
 <body>
@@ -50,6 +52,8 @@ html[lang=te] body{font-family:"Noto Serif Telugu","Noto Sans Telugu","Nirmala U
 <main id="cards"></main>
 <hr>
 <section id="wotd" aria-labelledby="wh"><h2 id="wh">Word of the Day</h2><div aria-live="polite">Loading…</div></section>
+<hr>
+<section id="ask" aria-labelledby="ah"><h2 id="ah">Ask a meaning</h2><form id="af"><label for="aq" class="m">Type or speak a word or saying, e.g. "what's reed?"</label><textarea id="aq" rows="2" maxlength="120" placeholder="What does stoic mean?"></textarea><div class="ar"><button type="submit">Look up</button><button type="button" id="mic" hidden aria-pressed="false">🎤 Speak</button></div></form><div id="ares" aria-live="polite"></div></section>
 <script>
 var Q={
 "Stoicism":[
@@ -128,7 +132,7 @@ var R=document.documentElement;R.lang="te";document.title="తత్త్వ �
 document.querySelector("h1").textContent="\u{1F33F} తత్త్వ సూక్తులు";
 document.querySelector("label").firstChild.textContent="థీమ్ ";
 var o=document.querySelectorAll("option");o[0].lastChild.textContent=" సిస్టమ్";o[1].lastChild.textContent=" లైట్";o[2].lastChild.textContent=" డార్క్";
-document.querySelector("hr").remove();document.getElementById("wotd").remove();
+document.querySelectorAll("hr").forEach(function(e){e.remove()});document.getElementById("wotd").remove();document.getElementById("ask").remove();
 fetch("te.json").then(function(r){return r.json()}).then(function(d){d.forEach(function(x){card(x.t,x.q,"కొత్త సూక్తి")})})
 }else{
 Object.keys(Q).forEach(function(k){card(k,Q[k],"New quote")});
@@ -144,6 +148,30 @@ d.append(el("p","",w.def));
 if(w.ex)d.append(el("p","m","\u201C"+w.ex+"\u201D"));
 var l=el("a","",w.url?"Merriam-Webster \u2192":"");l.href=w.url;l.rel="noopener";d.append(l)
 }).catch(function(){d.textContent="Word of the day is unavailable right now."})
+})();
+}
+if(!te){
+(function(){
+var f=document.getElementById("af"),q=document.getElementById("aq"),o=document.getElementById("ares"),m=document.getElementById("mic");
+function say(t){o.textContent=t}
+f.onsubmit=function(e){e.preventDefault();
+var w=q.value.toLowerCase().replace(/[?!.,"\u201C\u201D]/g," ").replace(/^\s*(please\s+)?(what\s+is\s+the\s+meaning\s+of|the\s+meaning\s+of|meaning\s+of|what\s*'?s|what\s+is|what\s+are|what\s+does|whats|define)\s+/,"").replace(/\s+(mean|means|meaning)\s*$/,"").replace(/^(an?|the)\s+(?=\S+\s*$)/,"").replace(/\s+/g," ").trim();
+if(!w){say("Type a word or saying first.");return}
+say("Looking up\u2026");
+fetch("https://api.datamuse.com/words?md=d&max=1&sp="+encodeURIComponent(w)).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(a){
+var x=a[0];if(!x||x.word!==w||!x.defs){say("No meaning found for \u201C"+w+"\u201D. Try a single word or a common saying.");return}
+o.textContent="";var h=document.createElement("p");h.className="w";h.textContent=x.word;var ol=document.createElement("ol");
+var T={n:"noun",v:"verb",adj:"adj.",adv:"adv."};
+x.defs.slice(0,4).forEach(function(d){var p=d.split("\t"),li=document.createElement("li");li.textContent=(T[p[0]]?"("+T[p[0]]+") ":"")+p[1].trim();ol.appendChild(li)});
+o.append(h,ol)}).catch(function(){say("Couldn\u2019t reach the dictionary. Check your connection and try again.")})};
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(SR){m.hidden=false;var r,on=0;m.onclick=function(){if(on){r.stop();return}
+r=new SR;r.lang="en-US";r.interimResults=false;
+r.onstart=function(){on=1;m.setAttribute("aria-pressed","true");m.textContent="\u23F9 Listening\u2026"};
+r.onend=function(){on=0;m.setAttribute("aria-pressed","false");m.textContent="\u{1F3A4} Speak"};
+r.onerror=function(e){say(e.error==="not-allowed"?"Microphone permission denied.":"Couldn\u2019t hear that. Try again.")};
+r.onresult=function(e){q.value=e.results[0][0].transcript;f.requestSubmit()};
+r.start()}}
 })();
 }
 var s=document.getElementById("theme");s.value=localStorage.getItem("theme")||"system";

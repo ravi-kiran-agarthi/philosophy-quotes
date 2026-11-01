@@ -31,3 +31,7 @@ Open `?lang=te`: https://ravi-kiran-agarthi.github.io/philosophy-quotes/?lang=te
 Shows the same five philosophies with translated quotes (Stoicism: the 66 Gutenberg quotes; others: 12 each) into Telugu (no toggle). Translations are in `te.json`, loaded only in this mode, so the English page is unaffected. Word of the Day is hidden.
 
 The Telugu translations are unreviewed; a native speaker should check nuance.
+
+## Ask a meaning
+
+Below Word of the Day: type or speak (mic, where the browser supports speech recognition) a word or saying, e.g. "what is reed?". Meanings come from the Datamuse API (no key), fetched only on submit, so page load is unaffected. English only.
