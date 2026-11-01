@@ -20,7 +20,7 @@ jobs:
       url: ${{ steps.d.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - run: mkdir _site && cp index.html te.json stoic.json _site/ && python3 scripts/wotd.py _site/wotd.json
+      - run: mkdir _site && cp index.html te.json stoic.json _site/ && python3 scripts/wotd.py _site/wotd.json && sed -i "s/__BUILD__/${GITHUB_SHA}/g" _site/index.html && echo "{\"build\":\"${GITHUB_SHA}\"}" > _site/version.json
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

@@ -35,3 +35,7 @@ The Telugu translations are unreviewed; a native speaker should check nuance.
 ## Ask a meaning
 
 Below Word of the Day: type or speak (mic, where the browser supports speech recognition) a word or saying, e.g. "what is reed?". Meanings come from the Datamuse API (no key), fetched only on submit, so page load is unaffected. English only.
+
+## Update banner
+
+The build SHA is stamped into `index.html` and `version.json` at deploy. The page checks `version.json` (no-store) every 5 min and on tab focus; if it differs, a "New changes available" bar with "Update now" shows. The button reloads via a fresh `?v=` URL, bypassing the HTTP cache. Fixed to the bottom so it causes no layout shift.

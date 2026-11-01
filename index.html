@@ -6,6 +6,7 @@
 <title>Philosophy Quotes</title>
 <meta name="description" content="Quotes from Stoicism, Taoism, Zen Buddhism and Hindu philosophy.">
 <meta name="color-scheme" content="light dark">
+<meta name="build" content="__BUILD__">
 <script>
 (function(){var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t})();
 </script>
@@ -44,11 +45,14 @@ select button{all:unset;display:inline-flex;align-items:center;gap:.5rem;cursor:
 html[lang=te] body{font-family:"Noto Serif Telugu","Noto Sans Telugu","Nirmala UI",Gautami,"Telugu Sangam MN",serif;line-height:1.9}
 #ask textarea{display:block;width:100%;max-width:65ch;margin:.5rem 0;font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:.6rem;resize:vertical}
 .ar{display:flex;gap:.5rem;margin:.25rem 0 .75rem}.ar button{margin:0}#ask button[type=submit]{background:var(--bt);border-color:var(--bt);color:var(--bf);font-weight:700}#mic[aria-pressed=true]{border-color:var(--ac);color:var(--ac);font-weight:700}#ares ol{margin:.3rem 0;padding-left:1.3rem;max-width:65ch}
+#upd{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;gap:.75rem;justify-content:center;align-items:center;padding:.6rem 1rem;background:var(--bt);color:var(--bf)}
+#upd[hidden]{display:none}#upd button{background:var(--bf);color:var(--bt);border-color:var(--bf);font-weight:700}
 </style>
 </head>
 <body>
 <header><h1>🌿 Philosophy Quotes</h1>
 <label>Theme <select id="theme"><button type="button"><selectedcontent></selectedcontent></button><option value="system"><span aria-hidden="true">💻</span> System</option><option value="light"><span aria-hidden="true">☀️</span> Light</option><option value="dark"><span aria-hidden="true">🌙</span> Dark</option></select></label></header>
+<div id="upd" role="status" hidden><span>New changes available</span><button type="button" id="updb">Update now</button></div>
 <main id="cards"></main>
 <hr>
 <section id="wotd" aria-labelledby="wh"><h2 id="wh">Word of the Day</h2><div aria-live="polite">Loading…</div></section>
@@ -123,6 +127,10 @@ var Q={
 ["Pray as though everything depended on God. Work as though everything depended on you.","Attributed to Augustine"]]
 };
 var cards=document.getElementById("cards"),te=new URLSearchParams(location.search).get("lang")==="te";
+var B=(document.querySelector("meta[name=build]")||{}).content||"",V=B.indexOf("__")===0?"":B,latest="";
+document.getElementById("updb").onclick=function(){location.replace(location.pathname+"?"+(location.search.indexOf("lang=te")>-1?"lang=te&":"")+"v="+(latest||Date.now()))};
+function chk(){if(!V)return;fetch("version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(j){if(j&&j.build&&j.build!==V){latest=j.build;document.getElementById("upd").hidden=false}}).catch(function(){})}
+setInterval(chk,3e5);document.addEventListener("visibilitychange",function(){if(!document.hidden)chk()});setTimeout(chk,3000);
 function card(k,list,label){var last,seen={},a=document.createElement("article"),h=document.createElement("h2"),b=document.createElement("blockquote"),c=document.createElement("cite"),n=document.createElement("button");
 h.textContent=k;n.textContent=label;n.type="button";b.setAttribute("aria-live","polite");
 function show(){var i,u=[],j;for(j=0;j<list.length;j++)if(!seen[j])u.push(j);if(!u.length){seen={};if(last!=null)seen[last]=1;for(j=0;j<list.length;j++)if(!seen[j])u.push(j)}i=u[Math.random()*u.length|0];seen[i]=1;last=i;var q=list[i];b.textContent="\u201C"+q[0]+"\u201D";c.textContent="\u2014 "+q[1];b.appendChild(c)}
@@ -133,10 +141,10 @@ document.querySelector("h1").textContent="\u{1F33F} తత్త్వ సూక
 document.querySelector("label").firstChild.textContent="థీమ్ ";
 var o=document.querySelectorAll("option");o[0].lastChild.textContent=" సిస్టమ్";o[1].lastChild.textContent=" లైట్";o[2].lastChild.textContent=" డార్క్";
 document.querySelectorAll("hr").forEach(function(e){e.remove()});document.getElementById("wotd").remove();document.getElementById("ask").remove();
-fetch("te.json").then(function(r){return r.json()}).then(function(d){d.forEach(function(x){card(x.t,x.q,"కొత్త సూక్తి")})})
+fetch("te.json?v="+B).then(function(r){return r.json()}).then(function(d){d.forEach(function(x){card(x.t,x.q,"కొత్త సూక్తి")})})
 }else{
 Object.keys(Q).forEach(function(k){card(k,Q[k],"New quote")});
-setTimeout(function(){fetch("stoic.json").then(function(r){return r.json()}).then(function(d){Array.prototype.push.apply(Q.Stoicism,d)}).catch(function(){})},1500);
+setTimeout(function(){fetch("stoic.json?v="+B).then(function(r){return r.json()}).then(function(d){Array.prototype.push.apply(Q.Stoicism,d)}).catch(function(){})},1500);
 (function(){
 var d=document.querySelector("#wotd div");
 function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;e.textContent=x;return e}
