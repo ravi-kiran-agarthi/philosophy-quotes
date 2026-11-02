@@ -185,5 +185,7 @@ r.start()}}
 var s=document.getElementById("theme");s.value=localStorage.getItem("theme")||"system";
 s.onchange=function(){var v=s.value,r=document.documentElement;if(v==="system"){localStorage.removeItem("theme");delete r.dataset.theme}else{localStorage.setItem("theme",v);r.dataset.theme=v}};
 </script>
+<script>(function(){var ua=navigator.userAgent;if(/Safari/.test(ua)&&!/Chrome|Chromium|CriOS|FxiOS|Edg|OPR|Android/.test(ua))return;var b=document.createElement("div");b.id="sfb";b.setAttribute("role","note");b.textContent="Voice input (🎤 Speak) may not work in this browser. For best results, use Safari.";b.style.cssText="background:#fff3cd;color:#664d03;padding:.5rem 1rem;text-align:center;font:14px/1.4 system-ui,sans-serif";document.body.insertBefore(b,document.body.firstChild)})();
+</script>
 </body>
 </html>
